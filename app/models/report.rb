@@ -146,8 +146,11 @@ class Report < ActiveRecord::Base
     backtrace = Rails.backtrace_cleaner.clean(e.backtrace)
     backtrace = backtrace.slice(0, 65535) if backtrace.length > 65535
 
+    uuid = SecureRandom.uuid
+    File.open("/data/failed_reports/#{uuid}.yaml", "w") { |f| f.write(raw_report.to_yaml) }
+
     DelayedJobFailure.create!(
-      :summary   => "Importing report",
+      :summary   => "Importing report #{uuid}",
       :details   => details,
       :backtrace => backtrace
     )
