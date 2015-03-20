@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'unicorn'
+gem 'unicorn-rails'
+
 gem 'rake'                , '~> 0.9.3'
 gem 'rails'               , '~> 3.2'
 gem 'will_paginate'       , '~> 3.0'
@@ -15,8 +18,9 @@ gem 'safe_yaml',    :require => false
 gem 'fastercsv',    :platforms => :ruby_18
 gem 'system_timer', :platforms => :ruby_18
 
-gem 'delayed_job', '~> 3.0'
-gem 'delayed_job_active_record', '~> 0.3.3'
+gem 'delayed_job', '~> 4.0'
+#gem 'delayed_job_active_record', '~> 4.0'
+gem 'delayed_job_active_record', github: 'ndbroadbent/delayed_job_active_record', branch: :fix_locking_issues
 gem 'timeline_fu', '~> 0.3.0'
 gem 'haml', '~> 3.1.8'
 
