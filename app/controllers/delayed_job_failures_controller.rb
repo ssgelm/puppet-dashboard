@@ -15,7 +15,7 @@ class DelayedJobFailuresController < ApplicationController
     end
     @delayed_job_failures = []
 
-    redirect_to "/"
+    redirect_to "/", :protocol => "https://"
   end
 
   def read
