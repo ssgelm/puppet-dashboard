@@ -132,6 +132,16 @@ class Report < ActiveRecord::Base
       report.resource_statuses.delete_if {|rs| rs.status == 'unchanged' }
     end
 
+    report.logs.each { |s|
+      last_time = s.time if s.time.class == ActiveSupport::TimeWithZone
+      s.time = last_time unless s.time.class == ActiveSupport::TimeWithZone
+    }
+
+    report.resource_statuses.each { |s|
+      last_time = s.time if s.time.class == ActiveSupport::TimeWithZone
+      s.time = last_time unless s.time.class == ActiveSupport::TimeWithZone
+    }
+
     report.save!
     return report
   rescue => e
